@@ -1,6 +1,6 @@
-class CreateRelationships < ActiveRecord::Migration[5.1]
+class CreateRelationship < ActiveRecord::Migration[5.1]
     def change
-      create_table :relationships do |t|
+      create_table :relationship do |t|
         t.timestamps
       end
     end
