@@ -1,4 +1,4 @@
-class CreateRelations < ActiveRecord::Migration[5.1]
+class CreateRelatonships < ActiveRecord::Migration[5.1]
     def change
       create_table :relationships do |t|
         t.timestamps
