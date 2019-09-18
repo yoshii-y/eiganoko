@@ -1,0 +1,80 @@
+<section>
+    <div class="show_front">
+        <div class="show_front_left">
+            <%= image_tag "https://image.tmdb.org/t/p/w300/#{@movie_info["poster_path"]}" %>
+        </div>
+        <div class="show_front_right">
+            <h1><%= @movie_info["title"] %></h1><br>
+            <div class="release_date">
+                公開日
+                <%= @movie_info["release_date"] %>
+            </div><br />
+            <% if @movie_info["overview"].blank? %>
+                #現在あらすじはございません<br>
+                <br>
+            <% else %>
+                <%= simple_format(@movie_info["overview"]) %>
+            <% end %>
+
+            <div>
+                ジャンル:
+                <% @movie_info["genres"].each do |genre| %>
+                    <%= genre["name"] %>,
+                <% end %>
+            </div><br>
+
+            <div>
+                <% if @movie_info["homepage"].blank? %>
+                <% else %>
+                    ホームページ<%= link_to @movie_info["homepage"],@movie_info["homepage"],target: :_blank %>
+                <% end %>
+            </div>
+        <div>
+    </div>
+</section>
+<br>
+
+<div class="show_comment">
+    <% if user_signed_in? %>
+        <div class="show_comment_signed btn-square-shadow">
+            コメントする
+        </div><hr>
+        <div class="show_comment_modal">
+            <div class="show_comment_form">
+                <div class="align-right"><i class="fas fa-times fa-2x close_comment_modal"></i></div>
+                <h3><%= @movie_info["title"] %></h3><br>
+                <%= form_for @comment do |f| %>
+                    <%= f.label :title, "タイトル" %>
+                    <%= f.text_field :title %><hr>
+                    <%= f.label :content, "ネタバレ！" %><br>
+                    <%= f.text_area :content %><br /><br />
+                    <%= f.submit "感想記入!!!" %>
+                <% end %>
+                <br />
+            </div>
+        </div>
+    <% else %>
+        <div class="show_comment_not_signed">
+            <%= link_to "コメントする", new_user_session_path %>
+        </div>
+        <hr>
+    <% end %>
+    <div class="comment_list">
+        <% @comments.each do |comment| %>
+            <div class="comment_list_li">
+                <i class="fas fa-user fa-2x"></i>
+                    <%= link_to comment.user.name, "/users/#{comment.user_id}" %><br />
+                    <%= comment.title %>
+                    <div class="comment_list_content"><%= simple_format(comment.content) %></div>
+                    <div class="comment_created_at"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+                    <%= render partial: "/likes/like",locals: {comment: comment}  %>
+                    <% if user_signed_in? %>
+                        <% if current_user.id == comment.user.id %>
+                            <%= link_to "削除", comment_path(comment.id), method: :delete %>
+                        <% end %>
+                    <% end %>
+            </div>
+            <hr>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="movie_index">
+    <% @comments.each do |comment| %>
+        <div class="comment_list_li">
+        <i class="fas fa-user fa-2x"></i>
+            <%= link_to comment.user.name, "/users/#{comment.user_id}" %><br />
+            <h5 class="index_movie_title"><%= link_to comment.movie_title ,movie_path(comment.movie_id) %></h5>
+            <h5><%= comment.title %></h5>
+            <div class="comment_list_content"><%= simple_format(comment.content) %></div>
+            <div class="comment_created_at"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+            <%= render partial: "/likes/like",locals: {comment: comment}  %>
+            <% if user_signed_in? %>
+                <% if current_user.id == comment.user.id %>
+                    <%= link_to "削除", comment_path(comment.id), method: :delete %>
+                <% end %>
+            <% end %>
+        </div>
+    <hr>
+    <% end %>
+</div>

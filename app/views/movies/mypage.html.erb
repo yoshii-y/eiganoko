@@ -1,0 +1,17 @@
+<div class="mypage-top">
+    <div class="mypage-top-icon">
+        <i class="fas fa-user fa-3x"></i>
+    </div>
+    <div>
+        <%= @user.name %>
+        <%= link_to ""%>
+        <i class="fas fa-marker "></i>
+    </div>
+
+
+
+    <% @comments.each do |comment| %>
+        <%= comment %>
+    <% end %>
+
+</div>

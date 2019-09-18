@@ -1,0 +1,226 @@
+<div class="change_width">
+<h2>ユーザー情報　<span class="user_flash"><%= flash[:notice] %></span></h2>
+<h5>
+<% if user_signed_in? %>
+    <% if @user.id != current_user.id %>
+        <%= render partial: "relationships/follow_button", locals: {user: @user} %>
+    <% end %>
+<% end %>
+
+<div class="introduce_user_icon"><i class="fas fa-user fa-3x"></i></div>
+<div class="introduce_user_id">性別：　<%= @user.gender %></div>
+<div class="introduce_user_id">ID:　<%= @user.id %></div>
+<div class="introduce_user_like_count">獲得いいね　<%= @user.likes.count %>いいね</div>
+<div class="user_follower_parent">
+    <div class="user_follower_child">
+        <div class="user_follow_count">
+            フォロー　<%= @user.relationships.count %><br>
+        </div>
+        <div class="user_follow_parent_modal">
+            <div class="user_follow_modal">
+                <div class="user_follower_list">
+                <div class="align-right"><i class="fas fa-times fa-2x close_follow_modal"></i></div>
+                    フォローリストID
+                    <ul>
+                        <% @follow.each do |follow| %>
+                            <% @users = User.find(follow.follow_id) %>
+                            <li><div class="user_follower_list_list"><%= link_to @users.name,user_path(follow.follow_id) %></div></li>
+                        <% end %>
+                    </ul><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="user_follower_child">
+        <div class="user_follower_count">
+            フォロワー　<%= @follower.count %>
+        </div>
+        <div class="user_follower_parent_modal">
+            <div class="user_follower_modal">
+                <div class="user_follower_list">
+                    <div class="align-right"><i class="fas fa-times fa-2x close_follower_modal"></i></div>
+                    フォロワーリスト
+                    <ul>
+                        <% @follower.each do |follower| %>
+                            <div class="user_follower_list_list">
+                                <li><%= link_to follower.user.name,user_path(follower.user_id) %></li>
+                            </div>
+                        <% end %>
+                    <ul>
+                        <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="introduce_user_name"><%= @user.name %>
+    <%if  user_signed_in? %>
+        <% if @user.id == current_user.id %>
+            <i class="fas fa-pencil-alt profile_update"></i>
+            　<span class="profile_introduction">プロフィールを更新</span>
+        <% else %>
+            <% if @isRoom == true %>
+                <p><a href="/rooms/<%= @roomId %>">チャットへ</a>
+            <% else %>
+                <%= form_for @room do |f| %>
+                  <%= fields_for @entry do |e| %>
+                    <%= e.hidden_field :user_id, :value=> @user.id %>
+                  <% end %>
+                  <%= f.submit "チャットを始める" %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" id="nav_profile_comment" href="#">コメント</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="nav_profile_profile" href="#">おすすめ映画</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="nav_profile_like" href="#">いいね</a>
+    </li>
+  </ul>
+</div>
+</nav>
+
+
+
+<div class="user_profile_comment">
+<% @user.comments.each do |comment| %>
+    <div class="user_profile_comment_list">映画　<%= link_to comment.movie_title,movie_path(comment.movie_id) %></div>
+    <h5 class="index_movie_title"><%= comment.title %></h5>
+    <h6 class="user_profile_comment_list"><%= simple_format(comment.content) %></h6>
+    <div class="comment_created_at"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+    <% if user_signed_in? %>
+        <% if current_user.id == comment.user.id %>
+            <h6><%= link_to "削除", comment_path(comment.id), method: :delete %></h6>
+        <% end %>
+<% end %>
+    <hr>
+<% end %>
+
+</div>
+<div class="user_profile_profile">
+    <div class="recomend_movie">
+      <div class="recomend_movie_top"><h3>オススメしたい映画TOP3</h3></div>
+        <div class="recomend_movie_content">
+            <h4>
+                <span id="recomend_movie_rank_1">1位</span>
+                <%= @user.movie1_title %>
+            </h4><br>
+            <div class="recomend_movie_introduction">
+                <%= simple_format(h(@user.movie1_text)) %>
+            </div>
+        </div>
+        <hr>
+        <div class="recomend_movie_content">
+            <h4>
+                <span id="recomend_movie_rank_2">2位</span>
+                <%= @user.movie2_title %>
+            </h4><br>
+            <div class="recomend_movie_introduction">
+                <%= simple_format(h(@user.movie2_text)) %>
+            </div>
+        </div>
+        <hr>
+        <div class="recomend_movie_content">
+            <h4>
+                <span id="recomend_movie_rank_3">3位</span>
+                <%= @user.movie3_title %>
+            </h4><br>
+            <div class="recomend_movie_introduction">
+                <%= simple_format(h(@user.movie3_text)) %>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<div class="user_profile_like">
+    <% if @like_comments.nil? != true  %>
+        <% @like_comments.each do |comment| %>
+            <h5 class="user_profile_comment_list"><%= link_to comment.user.name,user_path(comment.user_id) %></h5>
+            <h5 class="user_profile_comment_list"><%= link_to comment.movie_title, movie_path(comment.movie_id) %></h5>
+            <h5 class=""><%= comment.title %></h5>
+            <h5 class="user_profile_comment_list"><%= comment.content %></h5>
+            <hr>
+        <% end %>
+    <% end %>
+</div>
+
+
+
+
+<% if user_signed_in? %>
+    <% if @user.id == current_user.id %>
+    <div class="user_modal">
+        <div class="user_modal_form">
+            <div class="align-right"><i class="fas fa-times fa-2x close_modal"></i></div>
+            <%= form_for @user  do |f| %>
+                <div class="mypage_form">
+                    <div><%= f.label :name, "ユーザー名" %></div>
+                    <%= f.text_field :name %>
+                </div>
+                <br>
+
+                <div class="mypage_form">
+                    <div><%= f.label :gender ,"性別" %></div>
+                    <%= f.select :gender, ["男性","女性","秘密"] %>
+                </div>
+                <br>
+
+                <div class="mypage_form">
+                    <div><%= f.label :profile, "自己紹介" %></div>
+                    <%= f.text_area :profile %>
+                </div>
+                <hr>
+                <div class="mypage_form">
+                    <div><%= f.label :movie1_title , "1番の映画"%></div>
+                    <%= f.text_field :movie1_title %>
+                </div>
+                <br>
+
+                <div class="mypage_form">
+                    <div><%= f.label :movie1_text ,"紹介文" %></div>
+                    <%= f.text_area :movie1_text %>
+                </div>
+                <hr>
+                <div class="mypage_form">
+                    <div><%= f.label :movie2_title , "2番の映画"%></div>
+                    <%= f.text_field :movie2_title %>
+                </div>
+                <br>
+
+                <div class="mypage_form">
+                    <div><%= f.label :movie2_text , "紹介文"%></div>
+                    <%= f.text_area :movie2_text %>
+                </div>
+                <hr>
+                <div class="mypage_form">
+                    <div><%= f.label :movie3_title , "3番の映画"%></div>
+                    <%= f.text_field :movie3_title %>
+                </div>
+                <br>
+
+                <div class="mypage_form">
+                    <div><%= f.label :movie3_text, "紹介文" %></div>
+                    <%= f.text_area :movie3_text %>
+                </div>
+                <hr>
+                <%= f.submit "プロフィール更新" %>
+            <% end %>
+            <br>
+            </div>
+        </div>
+    <% end %>
+<% end %>
+</div>

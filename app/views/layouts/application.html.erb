@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>映画の子</title>
+
+    <%= csrf_meta_tags %>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'true' %>
+  </head>
+  <header>
+      <ul class="nav nav-pills">
+        <div class="header_logo"></div>
+        <h3 class="header_title">映画の子</h3>
+        <div class="header_search">
+          <li>
+            <%= form_tag(movies_search_path, method: :get) do %>
+              <%= search_field_tag :looking_for, nil, placeholder: '映画を検索' %>
+              <%= submit_tag '検索' %>
+            <% end %>
+          </li>
+        </div>
+
+
+
+        <div class="nav_access">
+              <li class="nav_list"><%= link_to "トップ",root_path ,class: "nav_list" %></li>
+              <li class="nav_list"><%= link_to "ランキング", rank_path ,class: "nav_list" %></li>
+        </div>
+        <% if user_signed_in? %>
+          <select onChange="top.location.href=value" name="user_drop" class="user_drop">
+            <option>ユーザー</option>
+            <option value="/users">フォローコメント</option>
+            <option value="/users/<%=current_user.id%>">プロフィール</option>
+            <option value="/users/edit">アカウント設定</option>
+          </select>
+        <% end %>
+
+
+        <%if user_signed_in? %>
+          <i class="fas fa-sign-out-alt sign_out_icon fa-2x white"></i>
+          <li class="active"><%= link_to "ログアウト", destroy_user_session_path, {class: "btn btn_sign_out",method: :delete} %></li>
+
+        <% else %>
+          <li class="header_list_log_in"><%= link_to "ログイン", new_user_session_path, class: "btn btn_log_in" %></li>
+          <li><%= link_to "新規登録", new_user_registration_path, class: "btn btn_sign_in" %></li>
+        <% end %>
+      </ul>
+    
+  </header>
+
+
+
+  <body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-10">
+        <%= yield %>
+      </div>
+      <div class="col-md-1">
+      </div>
+
+      </div>
+    </div>
+  </div>
+  </body>
+</html>

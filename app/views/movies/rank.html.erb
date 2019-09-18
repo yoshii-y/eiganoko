@@ -1,0 +1,24 @@
+<div class="top_rank">
+    
+    <h1>人気映画ランキング</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ランキング</th>
+                <th>ポスター</th>
+                <th>タイトル</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% integer = 1 %>
+            <% @movie_result.each do |movie| %>
+                    <tr>
+                        <% @movie_id = movie["id"] %>
+                        <td><%= integer %>位</td><% integer += 1 %>
+                        <td><%= image_tag("https://image.tmdb.org/t/p/w200/#{movie["backdrop_path"]}", :alt => 'poster') %></td>
+                        <td><%= link_to movie["title"] ,movie_path(@movie_id)%></td>
+                    </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

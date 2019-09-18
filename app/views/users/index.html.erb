@@ -1,0 +1,18 @@
+<div class="movie_index">
+    <h3>フォローコメント</h3>
+    <br>
+
+    <% @comments.each do |comment| %>
+        <div class="comment_list_li">
+            <i class="fas fa-user fa-2x"></i>
+            <% @user = @users.find(comment[0].user_id) %>
+            <%= link_to @user.name, "/users/#{@user.id}" %>
+            <h5 class="index_movie_title"><%= link_to comment[0].movie_title ,movie_path(comment[0].movie_id) %></h5>
+            <h5><%= comment[0].title %></h5>
+            <div class="comment_list_content"><%= simple_format(comment[0].content) %></div>
+            <div class="comment_created_at"><%= comment[0].created_at.strftime("%Y-%m-%d %H:%M") %></div>
+            <%= render partial: "/likes/like",locals: {comment: comment[0]}  %>
+        </div>
+    <hr>
+    <% end %>
+</div>

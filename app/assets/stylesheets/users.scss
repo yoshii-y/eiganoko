@@ -1,0 +1,229 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sign_top{
+    // margin-left: 15%;
+}
+.sign-parent{
+    display: flex;
+}
+.sign_image{
+    // margin-top: 40px;
+    width: 60%;
+    margin-left: 0;
+    padding-left: 0;
+    // background-color: red;
+    background-image: url("log_in.JPG");
+    background-size: cover;
+}
+.sign_form{
+    width: 40%;
+    // background-color: red;
+}
+.sign_image_log_in{
+    width: 50%;
+    background-image: url("log_in.JPG");
+    background-size: cover;
+}
+.sign_form_log_in{
+    margin-left: 10%;
+    width: 50%;
+}
+.user_flash{
+    color: #009933;
+    font-size: 20px;
+}
+
+.profile_introduction{
+    display: none;
+    color: red;
+    font-size: 20px;
+}
+.profile_update{
+    cursor: pointer;
+}
+.user_modal{
+    display: none;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    overflow-y: auto;
+}
+.user_modal_form{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-left: 50px;
+    border: solid 5px #6091d3;/*線*/
+    border-radius: 10px;/*角の丸み*/
+    background-color: white;
+}
+.align-right{
+    text-align: right;
+}
+.close_modal{
+    margin-right: 20px;
+    padding-top: 20px;
+    color: #666666;
+    cursor: pointer;
+}
+input[type="textarea"] {
+    width: 500px;
+    height: 40px;
+}
+textarea{
+    width: 80%;
+}
+.introduce_user_name{
+    margin-top: 20px;
+}
+.introduce_user_icon{
+    margin-top: 20px;
+}
+
+.navbar{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#nav_profile_comment{
+    color: #000011;
+}
+.user_profile_profile{
+    display: none;
+}
+.user_profile_like{
+    display: none;
+}
+.user_follower_parent{
+    display: flex;
+}
+.user_follow_count{
+    margin-right: 15px;
+    padding: 3px 6px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.user_follower_count{
+    margin-right: 15px;
+    padding: 3px 6px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.user_follower_list_list{
+    margin-top: 5px;
+}
+.user_follow_parent_modal{
+    display: none;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    overflow-y: auto;
+}
+.user_follower_parent_modal{
+    display: none;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    overflow-y: auto;
+}
+.user_follow_modal{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-left: 50px;
+    border: solid 5px #6091d3;/*線*/
+    border-radius: 10px;/*角の丸み*/
+    background-color: white;
+}
+.user_follower_modal{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-left: 50px;
+    border: solid 5px #6091d3;/*線*/
+    border-radius: 10px;/*角の丸み*/
+    background-color: white;
+}
+.close_follow_modal{
+    margin-right: 20px;
+    padding-top: 20px;
+    color: #666666;
+    cursor: pointer;
+}
+.close_follower_modal{
+    margin-right: 20px;
+    padding-top: 20px;
+    color: #666666;
+    cursor: pointer;
+}
+
+//index
+.movie_index{
+    width: 70%;
+    margin: 10px auto;
+}
+.index_movie_title{
+    margin: 10px 0;
+}
+.user_profile_comment_list{
+    line-height: 35px;
+}
+.change_width{
+    margin: 0 auto;
+    width:70%;
+}
+
+
+
+.introduce_user_icon{
+    margin-bottom: 10px;
+}
+.introduce_user_id{
+    margin-bottom: 10px;
+}
+.introduce_user_like_count{
+    margin-bottom: 10px;
+}
+
+
+
+
+.recomend_movie_top{
+    margin-bottom: 30px;
+}
+
+
+
+#recomend_movie_rank_1{
+    color: red;
+}
+#recomend_movie_rank_2{
+    color: blue;
+}
+#recomend_movie_rank_3{
+    color: green;
+}
+.recomend_movie_introduction{
+    line-height: 250%;
+}

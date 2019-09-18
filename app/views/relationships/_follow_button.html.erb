@@ -1,0 +1,16 @@
+<% unless current_user == user %>
+    <div class="#follow-link-<%= @user.id %>">
+
+        <% if current_user.relationships.find_by(follow_id: user.id) %>
+            <%= link_to unfollow_path(user.id),method: :delete, remote: true do %>
+                フォロー中
+            <% end %>
+        <% else %>
+            <%= link_to follow_path(user.id),method: :post, remote: true do %>
+                フォローする
+            <% end %>
+        <% end %>
+    </div>
+<% else %>
+    <%= link_to new_user_session_path, "フォローする" %>
+<% end %>

@@ -1,0 +1,119 @@
+// Place all the styles related to the movies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+
+//search
+.table_poster{
+    width: 30%;
+}
+.table_title{
+    width: 50%;
+
+}
+.table_release{
+    width: 20%;
+}
+// .table_title_td{
+//     vertical-align: middle;
+// }
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    vertical-align: middle;
+}
+//index
+.movie_index{
+    width: 70%;
+    margin: 10px auto;
+}
+
+// mypage
+.mypage-top{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 30px;
+    // background-color:blue; 
+}
+
+.mypage-top-icon{
+    width: 0;
+    margin: 0 auto;
+}
+
+.show_front{
+    display: flex;
+    flex-direction: row;
+}
+.release_date{
+    color: 	#CC3333;
+}
+.show_front_left{
+    padding-top: 5%;
+    padding-left: 5%;
+    width: 50%;
+}
+.show_front_right{
+    width: 50%;
+}
+.show_comment{
+    width: 70%;
+    margin: 0 auto;
+}
+.btn-square-shadow {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #668ad8;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 3px;
+  }
+  .btn-square-shadow:active {
+    /*ボタンを押したとき*/
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+  }
+
+.show_comment_signed{
+    color: white;
+    cursor: pointer;
+}
+
+
+.show_comment_modal{
+    display: none;
+    
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    overflow-y: auto;
+}
+
+.show_comment_form{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    padding-left: 50px;
+    border: solid 5px #6091d3;/*線*/
+    border-radius: 10px;/*角の丸み*/
+    background-color: white;
+}
+.close_comment_modal{
+    margin-right: 20px;
+    padding-top: 20px;
+    color: #666666;
+    cursor: pointer;
+}
+.comment_list_content{
+    line-height: 250%;
+}
+
+
