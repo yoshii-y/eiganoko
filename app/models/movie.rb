@@ -6,7 +6,10 @@ class Movie < ApplicationRecord
 
 
     # default_options.update(verify: false) # disable SSL verification(必要に応じて)
-    default_params api_key: ENV['MOVIE_SECRET_KEY'], language: 'ja-JP' #共通パラメタ                 
+    # default_params api_key: ENV['MOVIE_SECRET_KEY'], language: 'ja-JP' #共通パラメタ 
+    default_params api_key: e32834f63eb38f0349a11d868d0a87b1, language: 'ja-JP' #共通パラメタ 
+    
+                
     format :json
     
     def self.top

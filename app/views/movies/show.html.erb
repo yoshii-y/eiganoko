@@ -17,7 +17,10 @@
             <% end %>
 
             <div>
-
+                ジャンル:
+                <% @movie_info["genres"].each do |genre| %>
+                    <%= genre["name"] %>,
+                <% end %>
             </div><br>
 
             <div>
